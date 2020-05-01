@@ -10,7 +10,7 @@ import { browser } from 'protractor';
 export class UserService {
 
     constructor(private fb: FormBuilder, private http: HttpClient) { }
-    readonly BaseURI = 'https://localhost:44391/api';
+    readonly BaseURI = 'http://localhost:54277/api';
     formModel = this.fb.group({
         UserName: ['', Validators.required],
         Email: ['', Validators.email],
@@ -43,11 +43,11 @@ export class UserService {
             Password: this.formModel.value.Passwords.Password
         };
 
-        return this.http.post(this.BaseURI + '/ApplicationUser/Register', body);
+        return this.http.post(this.BaseURI + '/ApplicationUser/Register/Admin', body);
     }
 
     login(formData) {
-        return this.http.post(this.BaseURI + '/ApplicationUser/Login', formData);
+        return this.http.post(this.BaseURI + '/ApplicationUser/login', formData);
     }
 
 

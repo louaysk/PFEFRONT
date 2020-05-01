@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { UserService } from '@modules/auth/services';
+import { servicepanel} from "app/shared/servicepanel";
+import { ApplicationUserModel } from "app/shared/usermodel";
+
 
 
 
@@ -10,17 +13,17 @@ import { UserService } from '@modules/auth/services';
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent implements OnInit {
-    loading = false;
 
-  constructor(private userService: UserService) { }
+  constructor(public servicepanel : servicepanel) { }
 
   ngOnInit(){
-    //this.loading = true;
-    //this.userService.getAll().pipe(first()).subscribe(users => {
-      //  this.loading = false;
-      //  this.users = users;
-    //});
+
 }
+getusers(){
+     this.servicepanel.getusers().subscribe(res  =>{
+         this.servicepanel.list=res as ApplicationUserModel[] ;
+     })
+ }
 
 
 
