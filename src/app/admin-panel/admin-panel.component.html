@@ -1,25 +1,7 @@
-<div class="content-wrapper" style="min-height:1200.88px;">
-    <section class="content">
-  <div class="container">
-    <!-- <button type="button" class="btn btn-primary" (click)="openModalForPost()">Ajouter</button>
-    <form class="form-horizontal" id="add-form" [formGroup]="fseauchaudeService.DateForm" >
-    </form> -->
-    <div class="table-responsive">
-        <table class="table table-sm table-bordered  style_bidon" style="width: 100px;  border: 5x  rgb(0, 0, 0); border-collapse: collapse; ">
-          <tr>
-          <th scope="col" style="font-size: 15px;" ><strong>UserName</strong>   </th>
-          <th scope="col" ><strong>Email </strong> </th>
-          <th scope="col"><strong>FullName</strong></th>
-          <th scope="col"> <strong>Role </strong></th>
-          </tr>
-          <tr *ngFor="let f of servicepanel.list"  >
-          <td class="mb-0" >{{f.UserName}}</td>
-     <td class="mb-0">{{f.Email}}</td>
-     <td class="mb-0">{{f.FullName}}</td>
-     <td class="mb-0">{{f.Role}}</td>
-    </tr>
-        </table>
-    </div>
-  </div>
-    </section>
-</div>
+<!-- <sb-layout-dashboard> -->
+    <!-- <sb-dashboard-head title="Dashboard" [hideBreadcrumbs]="false"> -->
+    <!-- </sb-dashboard-head> -->
+    <sb-dashboard-tables></sb-dashboard-tables>
+<!-- </sb-layout-dashboard> -->
+
+

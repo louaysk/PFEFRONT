@@ -10,4 +10,5 @@ export const components = [
 
 export * from './dashboard-cards/dashboard-cards.component';
 export * from './dashboard-charts/dashboard-charts.component';
-export * from './dashboard-tables/dashboard-tables.component';
+export * from './dashboard-tables/dashboard-tables.component'
+export * from '../../../app/admin-panel/admin-panel.component';

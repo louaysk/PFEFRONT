@@ -47,6 +47,24 @@ export const ROUTES: Routes = [
         canActivate: [AuthGuard],
         component: dashboardContainers.StaticComponent,
     },
+    // {
+    //     path: 'admin-panel',
+    //     data: {
+    //         title: 'Dashboard Admin Panel',
+    //         breadcrumbs: [
+    //             {
+    //                 text: 'Dashboard',
+    //                 link: '/dashboard',
+    //             },
+    //             {
+    //                 text: 'Static',
+    //                 active: true,
+    //             },
+    //         ],
+    //     } as SBRouteData,
+    //     canActivate: [AuthGuard],
+    //     component: AdminPanelComponent,
+    // },
     {
         path: 'light',
         data: {

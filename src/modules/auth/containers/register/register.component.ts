@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmit() {
+        
         this.service.register().subscribe(
           (res: any) => {
             if (res.succeeded) {

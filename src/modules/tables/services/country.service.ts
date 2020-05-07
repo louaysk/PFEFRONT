@@ -5,6 +5,12 @@ import { SortDirection } from '@modules/tables/directives';
 import { Country } from '@modules/tables/models';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
+
+
 
 interface SearchResult {
     countries: Country[];
@@ -44,6 +50,9 @@ function matches(country: Country, term: string, pipe: PipeTransform) {
 
 @Injectable({ providedIn: 'root' })
 export class CountryService {
+
+    FormUpdate : any
+
     private _loading$ = new BehaviorSubject<boolean>(true);
     private _search$ = new Subject<void>();
     private _countries$ = new BehaviorSubject<Country[]>([]);
@@ -57,7 +66,16 @@ export class CountryService {
         sortDirection: '',
     };
 
-    constructor(private pipe: DecimalPipe) {
+    constructor(private pipe: DecimalPipe, private _httpClient: HttpClient , public fb: FormBuilder ) {
+
+        this.FormUpdate = this.fb.group({
+            id :[''],
+            UserName: ['', Validators.required],
+            Email: ['', Validators.email],
+            lastName: [''],
+            FirstName: [''],
+            PhoneNumber: ['']});
+
         this._search$
             .pipe(
                 tap(() => this._loading$.next(true)),
@@ -73,6 +91,10 @@ export class CountryService {
 
         this._search$.next();
     }
+
+
+
+
 
     get countries$() {
         return this._countries$.asObservable();
@@ -127,4 +149,68 @@ export class CountryService {
         countries = countries.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
         return of({ countries, total });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    url = 'http://localhost:54277/api/ApplicationUser/GetAdmins';
+    token= localStorage.getItem('token')
+    getUser(){
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${this.token}`
+            })
+          };
+       return this._httpClient.get<any>(this.url, httpOptions).pipe()
+    }
+
+    getUserById(id){
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${this.token}`
+            })
+          };
+       return this._httpClient.get<any>(`http://localhost:54277/api/ApplicationUser/getAdminById/${id}`, httpOptions).pipe()
+    }
+
+
+
+    deleteUser(username:string)
+    {
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${this.token}`
+            })
+          };
+        return this._httpClient.delete('http://localhost:54277/api/ApplicationUser/delete/'+ username, httpOptions).pipe()
+    }
+
+
+        EditUser()
+        {
+            debugger
+            const httpOptions = {
+                headers: new HttpHeaders({
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${this.token}`
+                })
+              };
+            return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/"+this.FormUpdate.value.id,this.FormUpdate.value,httpOptions);
+        }
+
 }

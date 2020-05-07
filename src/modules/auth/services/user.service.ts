@@ -9,15 +9,18 @@ import { browser } from 'protractor';
 })
 export class UserService {
 
+
     constructor(private fb: FormBuilder, private http: HttpClient) { }
     readonly BaseURI = 'http://localhost:54277/api';
     formModel = this.fb.group({
         UserName: ['', Validators.required],
         Email: ['', Validators.email],
-        FullName: [''],
+        lastName: [''],
+        FirstName: [''],
+        PhoneNumber: [''],
         Passwords: this.fb.group(
             {
-                Password: ['', [Validators.required, Validators.minLength(6)]],
+                Password: ['', Validators.required],
                 ConfirmPassword: ['', Validators.required],
             },
             { validator: this.comparePasswords }

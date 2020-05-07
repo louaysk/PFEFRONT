@@ -1,6 +1,8 @@
  export class ApplicationUserModel {
+    id : string ;
     userName : string ;
     email : string;
-    password : string ;
     fullName :string;
-    role : string ; }
+    phoneNumber : string ;
+    
+ }

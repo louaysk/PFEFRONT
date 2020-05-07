@@ -3,6 +3,10 @@ import { first } from 'rxjs/operators';
 import { UserService } from '@modules/auth/services';
 import { servicepanel} from "app/shared/servicepanel";
 import { ApplicationUserModel } from "app/shared/usermodel";
+import {TableModule} from 'primeng/table';
+import {AccordionModule} from 'primeng/accordion';
+import {MenuItem} from 'primeng/api';
+
 
 
 
@@ -14,16 +18,11 @@ import { ApplicationUserModel } from "app/shared/usermodel";
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor(public servicepanel : servicepanel) { }
+  constructor(public servicepanel : servicepanel) {
+  }
 
-  ngOnInit(){
+  ngOnInit(){}
 
-}
-getusers(){
-     this.servicepanel.getusers().subscribe(res  =>{
-         this.servicepanel.list=res as ApplicationUserModel[] ;
-     })
- }
 
 
 
