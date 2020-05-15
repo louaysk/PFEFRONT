@@ -42,7 +42,11 @@
                                     <div class="col-md-6">
                                         <div class="form-group" required><label class="small mb-1" for="inputPassword">Password</label><input required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" class="form-control py-4" id="inputPassword" formControlName="Password" type="password" placeholder="Enter password" />
                                             <label  class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.required">This field is mandatory. </label>
-                                            <label  class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.pattern">At least 8 caracters </label>
+                                            <label  class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.pattern">At least 8 caracters, appercases, lowercases and digits  </label>
+
+
+
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">

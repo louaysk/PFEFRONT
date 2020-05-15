@@ -53,6 +53,7 @@ export class CountryService {
 
     FormUpdate : any
 
+
     private _loading$ = new BehaviorSubject<boolean>(true);
     private _search$ = new Subject<void>();
     private _countries$ = new BehaviorSubject<Country[]>([]);
@@ -66,7 +67,7 @@ export class CountryService {
         sortDirection: '',
     };
 
-    constructor(private pipe: DecimalPipe, private _httpClient: HttpClient , public fb: FormBuilder ) {
+    constructor(private pipe: DecimalPipe, private _httpClient: HttpClient , public fb: FormBuilder  ) {
 
         this.FormUpdate = this.fb.group({
             id :[''],
@@ -75,6 +76,10 @@ export class CountryService {
             lastName: [''],
             FirstName: [''],
             PhoneNumber: ['']});
+
+
+
+
 
         this._search$
             .pipe(
@@ -203,7 +208,7 @@ export class CountryService {
 
         EditUser()
         {
-            debugger
+
             const httpOptions = {
                 headers: new HttpHeaders({
                   'Content-Type': 'application/json',
@@ -211,6 +216,52 @@ export class CountryService {
                 })
               };
             return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/"+this.FormUpdate.value.id,this.FormUpdate.value,httpOptions);
+        }
+
+        GetUserProfile(){
+            const httpOptions = {
+                headers: new HttpHeaders({
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${this.token}`
+                })
+              };
+              return this._httpClient.get("http://localhost:54277/api/UserProfile",httpOptions);
+        }
+
+        AddUser(){
+            const httpOptions = {
+                headers: new HttpHeaders({
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${this.token}`
+                })
+              };
+              return this._httpClient.post("http://localhost:54277/api/ApplicationUser/Register/Admin",httpOptions);
+        }
+
+
+        toglobaladmin(UserName : string)
+        {
+
+            const httpOptions = {
+                headers: new HttpHeaders({
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${this.token}`
+                })
+              };
+            return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/"+UserName,httpOptions);
+        }
+
+
+        toadmin(UserName : string)
+        {
+
+            const httpOptions = {
+                headers: new HttpHeaders({
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${this.token}`
+                })
+              };
+            return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/"+UserName,httpOptions);
         }
 
 }

@@ -1,5 +1,8 @@
 <form>
-    <div class="form-group form-inline">Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div>
+
+
+    <div class="form-group form-inline">   <button type="submit" class="btn btn-primary " routerLink="/auth/register" >+ Add New User</button>  &nbsp;  &nbsp;  Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -9,6 +12,7 @@
                 <th scope="col" sbSortable="Email" (sort)="onSort($event)"><span>Email</span><sb-sort-icon *ngIf='sortedColumn === "Email"' [direction]="sortedDirection"></sb-sort-icon></th>
                 <th scope="col" sbSortable="UserName" (sort)="onSort($event)"><span>UserName</span><sb-sort-icon *ngIf='sortedColumn === "UserName"' [direction]="sortedDirection"></sb-sort-icon></th>
                 <th scope="col" sbSortable="PhoneNumber" (sort)="onSort($event)"><span>PhoneNumber</span><sb-sort-icon *ngIf='sortedColumn === "PhoneNumber"' [direction]="sortedDirection"></sb-sort-icon></th>
+                <th scope="col" sbSortable="Role" (sort)="onSort($event)"><span>Role</span><sb-sort-icon *ngIf='sortedColumn === "Role"' [direction]="sortedDirection"></sb-sort-icon></th>
 
             </tr>
         </thead>
@@ -19,10 +23,12 @@
                 <td>{{ u.email }}</td>
                 <td>{{ u.userName }}</td>
                 <td>{{ u.phoneNumber }}</td>
+                <td>{{ u.roles }}</td>
                 <td>
                     <a (click)="goToEditUserPage(u)"><button class="btn btn-primary" >Edit</button></a>
                     &nbsp;
-                    <button  (click)="deleteItem(u.userName)" type="button" class="btn btn-primary" >Delete</button>
+
+                    <button  (click)="deleteItem(u.userName)"  class="btn btn-danger" >Delete</button>
                  </td>
             </tr>
         </tbody>

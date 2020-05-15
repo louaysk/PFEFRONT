@@ -26,7 +26,7 @@ export class EditorComponent implements OnInit {
       (res: any) => {
           console.log(res)
         if (res.succeeded) {
-          this.toastr.success('New user created!', 'Registration successful.');
+          this.toastr.success('User Modified !', 'Registration successful.');
         } else {
           res.errors.forEach(element => {
             switch (element.code) {
@@ -35,16 +35,32 @@ export class EditorComponent implements OnInit {
                 break;
 
               default:
-              this.toastr.error(element.description,'Registration failed.');
+              this.toastr.error(element.description,'Modified failed.');
                 break;
             }
           });
         }
       },
       err => {
-          debugger
+
         console.log(err);
       }
     );
   }
+
+
+
+
+  changeroletoglobal(username:string){
+    this.service.toglobaladmin(username).subscribe(()=>{
+
+    })
+}
+
+changeroletoadmin(username:string){
+    this.service.toglobaladmin(username).subscribe(()=>{
+
+    })
+}
+
 }

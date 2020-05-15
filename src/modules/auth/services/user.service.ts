@@ -41,8 +41,10 @@ export class UserService {
         console.log("register");
         var body = {
             UserName: this.formModel.value.UserName,
-            FullName: this.formModel.value.FullName,
+            lastName: this.formModel.value.lastName,
+            FirstName:this.formModel.value.FirstName,
             Email: this.formModel.value.Email,
+            PhoneNumber:this.formModel.value.PhoneNumber,
             Password: this.formModel.value.Passwords.Password
         };
 

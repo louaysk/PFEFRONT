@@ -76,7 +76,9 @@ export class NgBootstrapTableComponent implements OnInit {
 
     deleteItem(username:string) {
        this.countryService.deleteUser(username).subscribe(()=>{
-        // window.location.reload()
+
+         //window.location.reload()
+
       });
     }
 

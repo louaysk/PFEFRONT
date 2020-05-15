@@ -15,9 +15,10 @@ import { TablesModule } from '@modules/tables/tables.module';
 import { DashboardHeadComponent } from '@modules/navigation/components';
 import { DashboardModule } from '@modules/dashboard/dashboard.module';
 import { EditorComponent } from './editor/editor.component';
+import { ProfileComponent } from "app/layout/profile/profile.component";
 
 @NgModule({
-    declarations: [AppComponent,AdminPanelComponent, EditorComponent],
+    declarations: [AppComponent,AdminPanelComponent, EditorComponent,ProfileComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -27,7 +28,7 @@ import { EditorComponent } from './editor/editor.component';
         DashboardModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        
+
         ToastrModule.forRoot({ progressBar: true }),
     ],
     providers: [UserService],
