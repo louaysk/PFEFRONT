@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPanelComponent } from '@modules/dashboard/components';
-import { EditorComponent } from './editor/editor.component';
-import { ProfileComponent } from './layout/profile/profile.component';
+import { EditorComponent } from '../modules/dashboard/containers/editor/editor.component';
+import { ProfileComponent } from '../modules/dashboard/containers/profile/profile.component';
 let currentUser = JSON.parse(localStorage.getItem('currentUser'))
 const routes: Routes = [
     {

@@ -22,73 +22,25 @@ export class SideNavComponent implements OnInit, OnDestroy {
     constructor(public navigationService: NavigationService, public userService: UserService) {}
 
     ngOnInit() {
-
+        console.clear()
+        debugger
         console.log("sideNavItem",this.sideNavItems)
-        console.log("submenu before  :",this.sideNavItems.pages.submenu[0].submenu);
+        console.log("sideNavSections",this.sideNavSections)
+
         // let index  = this.sideNavItems.pages.submenu[0].submenu
         let role = localStorage.getItem('role')
         if (role) {
             if (role == "User") {
-                console.log("i m in the user*********************")
-                this.sideNavItems.pages.submenu[0].submenu = [
-                    {
-                        text: 'Login',
-                        link: '/auth/login',
-                    },
-                    {
-                        text: 'Register',
-                        link: '/auth/register',
-                    },
-                    {
-                        text: 'Forgot Password',
-                        link: '/auth/forgot-password',
-                    },
-                ]
+                this.sideNavSections = this.sideNavSections.filter(x=>x.index!=1)
             }else if (role == "Admin"){
-                console.log("i m in the admin*****************")
-                this.sideNavItems.pages.submenu[0].submenu =
-                [{
-                    text: 'Login',
-                    link: '/auth/login',
-                },
-                {
-                    text: 'Register',
-                    link: '/auth/register',
-                },
-                {
-                    text: 'Forgot Password',
-                    link: '/auth/forgot-password',
-                },]
+               // code here ..
             }else if (role == "GlobalAdmin"){
-                console.log("i m in the global admin *********************")
-                this.sideNavItems.pages.submenu[0].submenu =
-                [
-                    {
-                        text: 'Login',
-                        link: '/auth/login',
-                    },
-                    {
-                        text: 'Register',
-                        link: '/auth/register',
-                    },
-                    {
-                        text: 'Forgot Password',
-                        link: '/auth/forgot-password',
-                    },
-                    {
-                        text: 'Admin Panel ',
-                        link: '/admin-panel',
-                     }
+                // code here ..
+                // delete this.sideNavItems.adminPanel
 
-                ]
+
             }
-
         }
-
-        console.log("submenu after :",this.sideNavItems.pages.submenu[0].submenu);
-
-
-
     }
 
     ngOnDestroy() {

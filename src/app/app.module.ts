@@ -14,11 +14,11 @@ import { AdminPanelComponent } from '@modules/dashboard/components';
 import { TablesModule } from '@modules/tables/tables.module';
 import { DashboardHeadComponent } from '@modules/navigation/components';
 import { DashboardModule } from '@modules/dashboard/dashboard.module';
-import { EditorComponent } from './editor/editor.component';
-import { ProfileComponent } from "app/layout/profile/profile.component";
+import { EditorComponent } from '../modules/dashboard/containers/editor/editor.component';
+import { ProfileComponent } from "@modules/dashboard/containers/profile/profile.component";
 
 @NgModule({
-    declarations: [AppComponent,AdminPanelComponent, EditorComponent,ProfileComponent],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

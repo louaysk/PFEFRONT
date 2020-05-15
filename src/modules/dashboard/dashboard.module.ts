@@ -21,6 +21,9 @@ import * as dashboardGuards from './guards';
 
 /* Services */
 import * as dashboardServices from './services';
+import { AdminPanelComponent } from './components';
+import { EditorComponent } from './containers/editor/editor.component';
+import { ProfileComponent } from './containers/profile/profile.component';
 
 @NgModule({
     imports: [
@@ -34,7 +37,7 @@ import * as dashboardServices from './services';
         TablesModule,
     ],
     providers: [...dashboardServices.services, ...dashboardGuards.guards],
-    declarations: [...dashboardContainers.containers, ...dashboardComponents.components],
+    declarations: [...dashboardContainers.containers, ...dashboardComponents.components,AdminPanelComponent, EditorComponent,ProfileComponent],
     exports: [...dashboardContainers.containers, ...dashboardComponents.components],
 })
 export class DashboardModule {}

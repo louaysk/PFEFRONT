@@ -24,6 +24,7 @@ export interface SideNavItem {
 }
 
 export interface SideNavSection {
+    index?;
     text?: string;
     items: string[];
 }

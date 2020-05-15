@@ -2,13 +2,21 @@ import { SideNavItems, SideNavSection } from '@modules/navigation/models';
 
 export const sideNavSections: SideNavSection[] = [
     {
+        index : 0,
         text: 'Accueil',
         items: ['dashboard'],
 
     },
     {
+        index : 1,
+        text: 'Admin Panel',
+        items: ['adminPanel'],
+
+    },
+    {
+        index : 2,
         text: 'Profil Panel',
-        items: ['Profil'],
+        items: ['profil'],
 
     },
     // {
@@ -26,23 +34,15 @@ export const sideNavItems: SideNavItems = {
         icon: 'tachometer-alt',
         text: 'Dashboard',
         link: '/dashboard',
-
     },
-    Profil: {
-        icon: '',
-        text: 'Profil',
-        submenu: [
-            {
-                text: 'Profil',
-                link: '/Profile',
-            },
-            {
-                text: 'Admin Panel ',
-                link: '/admin-panel',
-             }]
+    adminPanel : {
+        text: 'Admin Panel ',
+        link: '/admin-panel',
     },
-
-
+    profil : {
+        text: 'Profil ',
+        link: '/Profile',
+    },
     // layouts: {
     //     icon: 'columns',
     //     text: 'Layouts',
