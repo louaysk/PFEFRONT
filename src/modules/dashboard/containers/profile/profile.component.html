@@ -1,8 +1,15 @@
 <sb-layout-dashboard>
-    <sb-dashboard-head title="Dashboard" [hideBreadcrumbs]="false">
-    </sb-dashboard-head>
-    <p>profile works!</p>
-    <p>Username = </p>
-    <!-- <p>{{userDetails.UserName}}</p> -->
+    <sb-dashboard-head title="DisplayProfile" [hideBreadcrumbs]="true"></sb-dashboard-head>
+    <div class="card m-5" style="width:18rem" *ngIf="userDetails">
+        <ul class="list-group">
+          <li class="list-group-item"><strong>Firstname : </strong>{{userDetails.firstName}}</li>
+          <li class="list-group-item"><strong>Lastname : </strong>{{userDetails.lastName}}</li>
+          <li class="list-group-item"><strong>Email : </strong>{{userDetails.email}}</li>
+          <li class="list-group-item"><strong>Username : </strong>{{userDetails.userName}}</li>
+          <li class="list-group-item"><strong>PhoneNumber : </strong>{{userDetails.phoneNumber}}</li>
+          <li class="list-group-item"><strong>Role : </strong>{{userDetails.role}}</li>
+
+        </ul>
+      </div>
 </sb-layout-dashboard>
 

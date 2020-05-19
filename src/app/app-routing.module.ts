@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminPanelComponent } from '@modules/dashboard/components';
 import { EditorComponent } from '../modules/dashboard/containers/editor/editor.component';
 import { ProfileComponent } from '../modules/dashboard/containers/profile/profile.component';
+import { ClientsComponent } from '../modules/dashboard/containers/clients/clients.component';
 let currentUser = JSON.parse(localStorage.getItem('currentUser'))
 const routes: Routes = [
     {
@@ -25,6 +26,10 @@ const routes: Routes = [
     {
         path: 'admin-panel',
         component : AdminPanelComponent
+    },
+    {
+        path: 'clients',
+        component : ClientsComponent
     },
     {
         path: 'Profile',

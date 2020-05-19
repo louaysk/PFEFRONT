@@ -6,61 +6,51 @@ import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'sb-editor',
-  templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.scss']
+    selector: 'sb-editor',
+    templateUrl: './editor.component.html',
+    styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit {
     userBody: any;
+    users2: any[]
 
-  constructor(public  service:CountryService, public toastr : ToastrService) {
 
-    console.log("FormUpdate : ",this.service.FormUpdate)
-  }
+    constructor(public service: CountryService, public toastr: ToastrService) {
 
-  ngOnInit(): void {
-  }
+        console.log("FormUpdate : ", this.service.FormUpdate)
+    }
 
-      OnUpdate(){
-    this.service.EditUser().subscribe(
-      (res: any) => {
-          console.log(res)
-        if (res.succeeded) {
-          this.toastr.success('User Modified !', 'Registration successful.');
-        } else {
-          res.errors.forEach(element => {
-            switch (element.code) {
-              case 'DuplicateUserName':
-                this.toastr.error('Username is already taken','Registration failed.');
-                break;
+    ngOnInit(): void {
+    }
 
-              default:
-              this.toastr.error(element.description,'Modified failed.');
-                break;
+    OnUpdate() {
+        this.service.EditUser().subscribe(
+            (res: any) => {
+                console.log(res)
+                if (res.succeeded) {
+                    this.toastr.success('User Modified !', 'Registration successful.');
+                }
+            },
+            err => {
+
+                console.log(err);
             }
-          });
-        }
-      },
-      err => {
-
-        console.log(err);
-      }
-    );
-  }
+        );
+    }
 
 
 
 
-  changeroletoglobal(username:string){
-    this.service.toglobaladmin(username).subscribe(()=>{
+    changeroletoglobal() {
+        this.service.toglobaladmin().subscribe(() => {
 
-    })
-}
+        })
+    }
 
-changeroletoadmin(username:string){
-    this.service.toglobaladmin(username).subscribe(()=>{
+    changeroletoadmin() {
+        this.service.toglobaladmin().subscribe(() => {
 
-    })
-}
+        });
+    }
 
 }

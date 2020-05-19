@@ -1,10 +1,14 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Edit User" [hideBreadcrumbs]="true">
+    </sb-dashboard-head>
+
 <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Edit Account</h3></div>
                     <div class="card-body">
-                        <form [formGroup]="service.FormUpdate" autocomplete="off" (submit)="onSubmit()">
+                        <form [formGroup]="service.FormUpdate" autocomplete="off" (submit)="OnUpdate()">
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group" required><label class="small mb-1" for="inputUserName">User Name</label><input class="form-control py-4" formControlName="UserName" id="inputUserName" type="text" placeholder="Enter User name" />
@@ -39,17 +43,16 @@
                             </div>
                             <div class="form-group form-inline">
 
-                                    <label class="small mb-1" for="inputLastName">Change Role</label>
-                                    &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;
-                                    &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;
-                                    &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-                                    <div class="inline-buttons">
-                                    <button type="submit" class="btn btn-primary btn-sm"  (click)="changeroletoglobal()" >To global admin </button> &nbsp;  &nbsp;&nbsp;  &nbsp;<button type="submit" class="btn btn-primary btn-sm" (click)="changeroletoadmin()" >To admin</button>
+                                    <label class="col-md-6 col-12 justify-content-start" for="inputLastName">Change Role</label>
+
+                                    <div class="inline-buttons col-md-6 col-12">
+
+                                    <button class="btn btn-primary btn-sm"  (click)="changeroletoglobal()" >To global admin </button><button  class="btn btn-primary btn-sm" (click)="changeroletoadmin()" style="margin-left: 10px" >To admin</button>
                                 </div>
 
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block" (click)="OnUpdate()"   [disabled]="!service.FormUpdate.valid">Save Changes</button>
-                            <button type="submit" class="btn btn-primary btn-block" routerLink="/admin-panel" >Return</button>
+                            <button  class="btn btn-primary btn-block" [disabled]="!service.FormUpdate.valid">Save Changes</button>
+                            <button  class="btn btn-primary btn-block" routerLink="/admin-panel" >Return</button>
 
                         </form>
                     </div>
@@ -58,4 +61,4 @@
             </div>
         </div>
     </div>
-
+</sb-layout-dashboard>

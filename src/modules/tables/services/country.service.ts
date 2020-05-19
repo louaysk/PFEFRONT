@@ -51,7 +51,7 @@ function matches(country: Country, term: string, pipe: PipeTransform) {
 @Injectable({ providedIn: 'root' })
 export class CountryService {
 
-    FormUpdate : any
+    FormUpdate: any
 
 
     private _loading$ = new BehaviorSubject<boolean>(true);
@@ -67,15 +67,16 @@ export class CountryService {
         sortDirection: '',
     };
 
-    constructor(private pipe: DecimalPipe, private _httpClient: HttpClient , public fb: FormBuilder  ) {
+    constructor(private pipe: DecimalPipe, private _httpClient: HttpClient, public fb: FormBuilder) {
 
         this.FormUpdate = this.fb.group({
-            id :[''],
+            id: [''],
             UserName: ['', Validators.required],
             Email: ['', Validators.email],
             lastName: [''],
             FirstName: [''],
-            PhoneNumber: ['']});
+            PhoneNumber: ['']
+        });
 
 
 
@@ -171,97 +172,93 @@ export class CountryService {
 
 
     url = 'http://localhost:54277/api/ApplicationUser/GetAdmins';
-    token= localStorage.getItem('token')
-    getUser(){
+    token = localStorage.getItem('token')
+    getUser() {
         const httpOptions = {
             headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${this.token}`
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
             })
-          };
-       return this._httpClient.get<any>(this.url, httpOptions).pipe()
+        };
+        return this._httpClient.get<any>(this.url, httpOptions).pipe()
     }
 
-    getUserById(id){
+    getUserById(id) {
         const httpOptions = {
             headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${this.token}`
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
             })
-          };
-       return this._httpClient.get<any>(`http://localhost:54277/api/ApplicationUser/getAdminById/${id}`, httpOptions).pipe()
-    }
-
-
-
-    deleteUser(username:string)
-    {
-        const httpOptions = {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${this.token}`
-            })
-          };
-        return this._httpClient.delete('http://localhost:54277/api/ApplicationUser/delete/'+ username, httpOptions).pipe()
+        };
+        return this._httpClient.get<any>(`http://localhost:54277/api/ApplicationUser/getAdminById/${id}`, httpOptions).pipe()
     }
 
 
-        EditUser()
-        {
 
-            const httpOptions = {
-                headers: new HttpHeaders({
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${this.token}`
-                })
-              };
-            return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/"+this.FormUpdate.value.id,this.FormUpdate.value,httpOptions);
-        }
-
-        GetUserProfile(){
-            const httpOptions = {
-                headers: new HttpHeaders({
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${this.token}`
-                })
-              };
-              return this._httpClient.get("http://localhost:54277/api/UserProfile",httpOptions);
-        }
-
-        AddUser(){
-            const httpOptions = {
-                headers: new HttpHeaders({
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${this.token}`
-                })
-              };
-              return this._httpClient.post("http://localhost:54277/api/ApplicationUser/Register/Admin",httpOptions);
-        }
+    deleteUser(username: string) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.delete('http://localhost:54277/api/ApplicationUser/delete/' + username, httpOptions).pipe()
+    }
 
 
-        toglobaladmin(UserName : string)
-        {
+    EditUser() {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/" + this.FormUpdate.value.id, this.FormUpdate.value, httpOptions);
+    }
 
-            const httpOptions = {
-                headers: new HttpHeaders({
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${this.token}`
-                })
-              };
-            return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/"+UserName,httpOptions);
-        }
+    GetUserProfile() {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.get("http://localhost:54277/api/UserProfile", httpOptions);
+    }
+
+    AddUser() {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.post("http://localhost:54277/api/ApplicationUser/Register/Admin", httpOptions);
+    }
 
 
-        toadmin(UserName : string)
-        {
+    toglobaladmin() {
+        debugger
+        console.log()
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.put("http://localhost:54277/api/ApplicationUser/ChangeToGlobal/" + this.FormUpdate.value.UserName, httpOptions);
+    }
 
-            const httpOptions = {
-                headers: new HttpHeaders({
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${this.token}`
-                })
-              };
-            return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/"+UserName,httpOptions);
-        }
+
+    toadmin() {
+        debugger
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.put("http://localhost:54277/api/ApplicationUser/ChangeToAdmin/" + this.FormUpdate.value.UserName, httpOptions);
+    }
 
 }

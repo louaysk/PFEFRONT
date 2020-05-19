@@ -19,6 +19,12 @@ export const sideNavSections: SideNavSection[] = [
         items: ['profil'],
 
     },
+    {
+        index : 3,
+        text: 'Clients',
+        items: ['clients'],
+
+    },
     // {
     //     text: 'INTERFACE',
     //     items: ['layouts', 'pages'],
@@ -43,6 +49,12 @@ export const sideNavItems: SideNavItems = {
         text: 'Profil ',
         link: '/Profile',
     },
+    clients : {
+        text: 'Clients ',
+        link: '/clients',
+    },
+
+
     // layouts: {
     //     icon: 'columns',
     //     text: 'Layouts',

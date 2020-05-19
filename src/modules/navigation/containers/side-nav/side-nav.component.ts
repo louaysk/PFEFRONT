@@ -23,7 +23,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         console.clear()
-        debugger
+
         console.log("sideNavItem",this.sideNavItems)
         console.log("sideNavSections",this.sideNavSections)
 
@@ -32,8 +32,12 @@ export class SideNavComponent implements OnInit, OnDestroy {
         if (role) {
             if (role == "User") {
                 this.sideNavSections = this.sideNavSections.filter(x=>x.index!=1)
+                this.sideNavSections = this.sideNavSections.filter(x=>x.index!=3)
+
             }else if (role == "Admin"){
-               // code here ..
+                this.sideNavSections = this.sideNavSections.filter(x=>x.index!=1)
+                this.sideNavSections = this.sideNavSections.filter(x=>x.index!=3)
+
             }else if (role == "GlobalAdmin"){
                 // code here ..
                 // delete this.sideNavItems.adminPanel
