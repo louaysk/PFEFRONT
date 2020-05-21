@@ -48,7 +48,7 @@ export class EditorComponent implements OnInit {
     }
 
     changeroletoadmin() {
-        this.service.toglobaladmin().subscribe(() => {
+        this.service.toadmin().subscribe(() => {
 
         });
     }

@@ -75,7 +75,8 @@ export class CountryService {
             Email: ['', Validators.email],
             lastName: [''],
             FirstName: [''],
-            PhoneNumber: ['']
+            PhoneNumber: [''],
+            Role: ['']
         });
 
 

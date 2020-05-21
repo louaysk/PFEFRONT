@@ -62,13 +62,16 @@ export class NgBootstrapTableComponent implements OnInit {
     }
 
     goToEditUserPage(user){
+
+
         this.countryService.FormUpdate.patchValue({
         id :user.id,
-        UserName: user.userName,
+        UserName: user.username,
         Email: user.email,
-        lastName: user.lastname,
-        FirstName: user.firstname,
-        PhoneNumber: user.phoneNumber
+        lastName: user.lastName,
+        FirstName: user.firstName,
+        PhoneNumber: user.phoneNumber,
+        Role : user.role
         });
         console.log("FormUpdate : ",this.countryService.FormUpdate)
         this.route.navigate(["/admin-panel/edit-user/"]);

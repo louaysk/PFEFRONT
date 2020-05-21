@@ -47,7 +47,11 @@
 
                                     <div class="inline-buttons col-md-6 col-12">
 
-                                    <button class="btn btn-primary btn-sm"  (click)="changeroletoglobal()" >To global admin </button><button  class="btn btn-primary btn-sm" (click)="changeroletoadmin()" style="margin-left: 10px" >To admin</button>
+                                    <button *ngIf="service.FormUpdate.value.Role == 'Admin';else GlobalAdminBloc;" class="btn btn-primary btn-sm"  (click)="changeroletoglobal()" >To global admin </button>
+                                    <ng-template #GlobalAdminBloc>
+                                        <button  class="btn btn-primary btn-sm" (click)="changeroletoadmin()" style="margin-left: 10px" >To admin</button>
+                                    </ng-template>
+
                                 </div>
 
                             </div>
