@@ -214,6 +214,7 @@ export class CountryService {
                 'Authorization': `Bearer ${this.token}`
             })
         };
+        debugger
         return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/" + this.FormUpdate.value.id, this.FormUpdate.value, httpOptions);
     }
 
@@ -221,7 +222,7 @@ export class CountryService {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.token}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             })
         };
         return this._httpClient.get("http://localhost:54277/api/UserProfile", httpOptions);

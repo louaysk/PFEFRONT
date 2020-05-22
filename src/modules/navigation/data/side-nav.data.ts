@@ -10,7 +10,7 @@ export const sideNavSections: SideNavSection[] = [
     {
         index : 1,
         text: 'Admin Panel',
-        items: ['adminPanel'],
+        items: ['adminPanel','Register'],
 
     },
     {
@@ -42,9 +42,14 @@ export const sideNavItems: SideNavItems = {
         link: '/dashboard',
     },
     adminPanel : {
-        text: 'Admin Panel ',
+        text: 'Manage Users',
         link: '/admin-panel',
     },
+
+    Register:{
+       text: 'Add New User',
+        link: '/auth/register',
+   },
     profil : {
         text: 'Profil ',
         link: '/Profile',

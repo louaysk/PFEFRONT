@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryService } from '@modules/tables/services';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -15,8 +15,10 @@ export class EditorComponent implements OnInit {
     users2: any[]
 
 
-    constructor(public service: CountryService, public toastr: ToastrService) {
-
+    constructor(public service: CountryService, public toastr: ToastrService, private route : Router) {
+        if (!this.service.FormUpdate.value.id) {
+            this.route.navigate(["/admin-panel/"]);
+        }
         console.log("FormUpdate : ", this.service.FormUpdate)
     }
 
@@ -42,14 +44,18 @@ export class EditorComponent implements OnInit {
 
 
     changeroletoglobal() {
-        this.service.toglobaladmin().subscribe(() => {
-
+        this.service.toglobaladmin()
+        .subscribe((res) => {
+            console.log(res[0])
+            this.service.FormUpdate.value.Role = res[0]
         })
     }
 
     changeroletoadmin() {
-        this.service.toadmin().subscribe(() => {
-
+        this.service.toadmin()
+        .subscribe((res) => {
+            console.log(res[0])
+            this.service.FormUpdate.value.Role = res[0]
         });
     }
 

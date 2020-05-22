@@ -8,7 +8,7 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Edit Account</h3></div>
                     <div class="card-body">
-                        <form [formGroup]="service.FormUpdate" autocomplete="off" (submit)="OnUpdate()">
+                        <form [formGroup]="service.FormUpdate" autocomplete="off">
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group" required><label class="small mb-1" for="inputUserName">User Name</label><input class="form-control py-4" formControlName="UserName" id="inputUserName" type="text" placeholder="Enter User name" />
@@ -55,7 +55,7 @@
                                 </div>
 
                             </div>
-                            <button  class="btn btn-primary btn-block" [disabled]="!service.FormUpdate.valid">Save Changes</button>
+                            <button  class="btn btn-primary btn-block" [disabled]="!service.FormUpdate.valid" (click)="OnUpdate()">Save Changes</button>
                             <button  class="btn btn-primary btn-block" routerLink="/admin-panel" >Return</button>
 
                         </form>

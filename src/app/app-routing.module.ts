@@ -4,6 +4,7 @@ import { AdminPanelComponent } from '@modules/dashboard/components';
 import { EditorComponent } from '../modules/dashboard/containers/editor/editor.component';
 import { ProfileComponent } from '../modules/dashboard/containers/profile/profile.component';
 import { ClientsComponent } from '../modules/dashboard/containers/clients/clients.component';
+import { AuthGuard } from '@modules/auth/guards';
 let currentUser = JSON.parse(localStorage.getItem('currentUser'))
 const routes: Routes = [
     {
@@ -25,19 +26,26 @@ const routes: Routes = [
     },
     {
         path: 'admin-panel',
-        component : AdminPanelComponent
+        component : AdminPanelComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'clients',
-        component : ClientsComponent
+        component : ClientsComponent,
+        canActivate: [AuthGuard],
+
     },
     {
         path: 'Profile',
-        component : ProfileComponent
+        component : ProfileComponent,
+        canActivate: [AuthGuard],
+
     },
     {
         path: 'admin-panel/edit-user',
-        component : EditorComponent
+        component : EditorComponent,
+        canActivate: [AuthGuard],
+
     },
     {
         path: 'auth',

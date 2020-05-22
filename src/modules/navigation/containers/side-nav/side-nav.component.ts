@@ -4,6 +4,7 @@ import { SideNavItems, SideNavSection } from '@modules/navigation/models';
 import { NavigationService } from '@modules/navigation/services';
 import { Subscription } from 'rxjs';
 import { log } from 'util';
+import jwt_decode from "jwt-decode";
 
 @Component({
     selector: 'sb-side-nav',
@@ -21,13 +22,16 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
     constructor(public navigationService: NavigationService, public userService: UserService) {}
 
+    username : string = ''
+
     ngOnInit() {
-        console.clear()
+        let token = localStorage.getItem('token')
+        if (token) {
+            let decodedToken : any = jwt_decode(token);
+            this.username = decodedToken.UserName
+            console.log(decodedToken.UserName)
+        }
 
-        console.log("sideNavItem",this.sideNavItems)
-        console.log("sideNavSections",this.sideNavSections)
-
-        // let index  = this.sideNavItems.pages.submenu[0].submenu
         let role = localStorage.getItem('role')
         if (role) {
             if (role == "User") {
@@ -41,8 +45,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
             }else if (role == "GlobalAdmin"){
                 // code here ..
                 // delete this.sideNavItems.adminPanel
-
-
             }
         }
     }

@@ -14,19 +14,21 @@ export class ProfileComponent implements OnInit {
     roles;
 
 
-  constructor(private router: Router, private service: CountryService) { }
-
-  ngOnInit(): void {
-    this.service.GetUserProfile().subscribe(
+  constructor(private router: Router, private service: CountryService) {
+    this.service.GetUserProfile()
+    .subscribe(
         res => {
             this.userDetails = res;
+            console.log("this.userDetails : ",this.userDetails)
         },
         err => {
             console.log(err);
         },
     );
 
+   }
+
+  ngOnInit(): void {
 
   }
-
 }
