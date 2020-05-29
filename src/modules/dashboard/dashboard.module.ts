@@ -25,6 +25,8 @@ import { AdminPanelComponent } from './components';
 import { EditorComponent } from './containers/editor/editor.component';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { ClientsComponent } from '@modules/dashboard/containers/clients/clients.component';
+import { UsersComponent } from './containers/users/users.component';
+import { OrganisationsComponent } from './containers/organisations/organisations.component';
 
 @NgModule({
     imports: [
@@ -38,7 +40,7 @@ import { ClientsComponent } from '@modules/dashboard/containers/clients/clients.
         TablesModule,
     ],
     providers: [...dashboardServices.services, ...dashboardGuards.guards],
-    declarations: [...dashboardContainers.containers, ...dashboardComponents.components,AdminPanelComponent, EditorComponent,ProfileComponent,ClientsComponent],
+    declarations: [...dashboardContainers.containers, ...dashboardComponents.components,AdminPanelComponent, EditorComponent,ProfileComponent,ClientsComponent,UsersComponent,OrganisationsComponent],
     exports: [...dashboardContainers.containers, ...dashboardComponents.components],
 })
 export class DashboardModule {}

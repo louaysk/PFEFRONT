@@ -17,6 +17,7 @@ import { DashboardModule } from '@modules/dashboard/dashboard.module';
 import { EditorComponent } from '../modules/dashboard/containers/editor/editor.component';
 import { ProfileComponent } from "@modules/dashboard/containers/profile/profile.component";
 import { ClientsComponent } from '../modules/dashboard/containers/clients/clients.component';
+import { OrganisationsComponent } from '../modules/dashboard/containers/organisations/organisations.component';
 
 @NgModule({
     declarations: [AppComponent],

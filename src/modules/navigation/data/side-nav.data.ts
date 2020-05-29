@@ -25,6 +25,18 @@ export const sideNavSections: SideNavSection[] = [
         items: ['clients'],
 
     },
+    {
+        index : 4,
+        text: 'Users',
+        items: ['users'],
+
+    },
+    {
+        index : 5,
+        text: 'Organisations',
+        items: ['organisations'],
+
+    },
     // {
     //     text: 'INTERFACE',
     //     items: ['layouts', 'pages'],
@@ -58,6 +70,15 @@ export const sideNavItems: SideNavItems = {
         text: 'Clients ',
         link: '/clients',
     },
+    users : {
+        text: 'Users ',
+        link: '/users',
+    },
+    organisations : {
+        text: 'Organisations ',
+        link: '/organisations',
+    },
+
 
 
     // layouts: {

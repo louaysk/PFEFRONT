@@ -1,26 +1,27 @@
- <sb-layout-dashboard>
-    <sb-dashboard-head title="List of Clients" [hideBreadcrumbs]="true"></sb-dashboard-head>
+<sb-layout-dashboard>
+    <sb-dashboard-head title="List of Organisations" [hideBreadcrumbs]="true"></sb-dashboard-head>
     <div class="form-group form-inline">  Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div>
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col"><span>ClientName</span>
+                <th scope="col"><span>Id</span>
                 </th>
-                <th scope="col"><span>ClientUri</span>
+                <th scope="col"><span>Name</span>
                 </th>
-                <th scope="col"><span>Enabled</span>
-                </th>
-                <th scope="col"><span>Flow</span>
+                <th scope="col"><span>ParentId</span>
                 </th>
             </tr>
         </thead>
-        <tbody *ngIf="clients.length>0">
-                <tr *ngFor="let c of clients">
-                    <td>{{ c.ClientName }}</td>
-                    <td>{{ c.ClientUri }}</td>
-                    <td>{{ c.Enabled }}</td>
-                    <td>{{ c.Flow }}</td>
+        <tbody *ngIf="organisations.length>0">
+                <tr *ngFor="let c of organisations">
+                    <td>{{ c.Id }}</td>
+                    <td>{{ c.Name }}</td>
+                    <td>{{ c.ParentId }}</td>
+                    <td>
+                        <a><button class="btn btn-primary" >Set Default</button></a>
+                        &nbsp;
+                    </td>
                 </tr>
         </tbody>
     </table>

@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'environments/environment';
 
 
 
@@ -52,7 +53,7 @@ function matches(country: Country, term: string, pipe: PipeTransform) {
 export class CountryService {
 
     FormUpdate: any
-
+    baseUrl = environment.apiUrl;
 
     private _loading$ = new BehaviorSubject<boolean>(true);
     private _search$ = new Subject<void>();
@@ -157,22 +158,6 @@ export class CountryService {
         return of({ countries, total });
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    url = 'http://localhost:54277/api/ApplicationUser/GetAdmins';
     token = localStorage.getItem('token')
     getUser() {
         const httpOptions = {
@@ -181,7 +166,7 @@ export class CountryService {
                 'Authorization': `Bearer ${this.token}`
             })
         };
-        return this._httpClient.get<any>(this.url, httpOptions).pipe()
+        return this._httpClient.get<any>(this.baseUrl+'ApplicationUser/GetAdmins', httpOptions).pipe()
     }
 
     getUserById(id) {
@@ -191,7 +176,7 @@ export class CountryService {
                 'Authorization': `Bearer ${this.token}`
             })
         };
-        return this._httpClient.get<any>(`http://localhost:54277/api/ApplicationUser/getAdminById/${id}`, httpOptions).pipe()
+        return this._httpClient.get<any>(this.baseUrl+`ApplicationUser/getAdminById/${id}`, httpOptions).pipe()
     }
 
 
@@ -203,7 +188,7 @@ export class CountryService {
                 'Authorization': `Bearer ${this.token}`
             })
         };
-        return this._httpClient.delete('http://localhost:54277/api/ApplicationUser/delete/' + username, httpOptions).pipe()
+        return this._httpClient.delete(this.baseUrl+'ApplicationUser/delete/' + username, httpOptions).pipe()
     }
 
 
@@ -215,7 +200,7 @@ export class CountryService {
             })
         };
         debugger
-        return this._httpClient.put("http://localhost:54277/api/ApplicationUser/Edit/" + this.FormUpdate.value.id, this.FormUpdate.value, httpOptions);
+        return this._httpClient.put(this.baseUrl+"ApplicationUser/Edit/" + this.FormUpdate.value.id, this.FormUpdate.value, httpOptions);
     }
 
     GetUserProfile() {
@@ -225,7 +210,7 @@ export class CountryService {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             })
         };
-        return this._httpClient.get("http://localhost:54277/api/UserProfile", httpOptions);
+        return this._httpClient.get(this.baseUrl+"UserProfile", httpOptions);
     }
 
     AddUser() {
@@ -235,12 +220,12 @@ export class CountryService {
                 'Authorization': `Bearer ${this.token}`
             })
         };
-        return this._httpClient.post("http://localhost:54277/api/ApplicationUser/Register/Admin", httpOptions);
+        return this._httpClient.post(this.baseUrl+"ApplicationUser/Register/Admin", httpOptions);
     }
 
 
     toglobaladmin() {
-        debugger
+
         console.log()
         const httpOptions = {
             headers: new HttpHeaders({
@@ -248,19 +233,52 @@ export class CountryService {
                 'Authorization': `Bearer ${this.token}`
             })
         };
-        return this._httpClient.put("http://localhost:54277/api/ApplicationUser/ChangeToGlobal/" + this.FormUpdate.value.UserName, httpOptions);
+        return this._httpClient.put(this.baseUrl+"ApplicationUser/ChangeToGlobal/" + this.FormUpdate.value.UserName, httpOptions);
     }
 
 
     toadmin() {
-        debugger
+
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.token}`
             })
         };
-        return this._httpClient.put("http://localhost:54277/api/ApplicationUser/ChangeToAdmin/" + this.FormUpdate.value.UserName, httpOptions);
+        return this._httpClient.put(this.baseUrl+"ApplicationUser/ChangeToAdmin/" + this.FormUpdate.value.UserName, httpOptions);
     }
 
+
+
+    getclients(page,pageSize) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.get<any>(this.baseUrl+`Crayon/getClients?page=${page}&pageSize=${pageSize}`, httpOptions).pipe()
+    }
+
+
+    getuserscrayon(page,pageSize) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.get<any>(this.baseUrl+`Crayon/getUsers?page=${page}&pageSize=${pageSize}`, httpOptions).pipe()
+    }
+
+
+    getorganisations(page,pageSize) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.get<any>(this.baseUrl+`Crayon/getOrganizations?page=${page}&pageSize=${pageSize}`, httpOptions).pipe()
+    }
 }

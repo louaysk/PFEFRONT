@@ -56,6 +56,8 @@ export class NgBootstrapTableComponent implements OnInit {
         this.countryService.getUser().subscribe(
             (res)=>{
                 this.users= res
+                this.countryService.page--
+                this.countryService.page++
                 console.log('data is ',res)
             }
         )
@@ -76,8 +78,8 @@ export class NgBootstrapTableComponent implements OnInit {
         this.route.navigate(["/admin-panel/edit-user/"]);
     }
 
-    deleteItem(username:string) {
-       this.countryService.deleteUser(username).subscribe(()=>{
+    deleteItem(UserName:string) {
+       this.countryService.deleteUser(UserName).subscribe(()=>{
 
          //window.location.reload()
 

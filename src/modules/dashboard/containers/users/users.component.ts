@@ -1,41 +1,41 @@
-import { Component, OnInit, Input, QueryList, ViewChildren,ChangeDetectionStrategy ,ChangeDetectorRef} from '@angular/core';
-import { CountryService } from '@modules/tables/services';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, QueryList, ViewChildren,ChangeDetectionStrategy ,ChangeDetectorRef } from '@angular/core';
+import { Observable } from 'rxjs';
 import { SBSortableHeaderDirective, SortEvent } from '@modules/tables/directives';
 import { Country } from '@modules/tables/models';
-import { Observable } from 'rxjs';
+import { CountryService } from '@modules/tables/services';
+import { Router } from '@angular/router';
 
 
 
 
 @Component({
-  selector: 'sb-clients',
+  selector: 'sb-users',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss']
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss']
 })
-export class ClientsComponent implements OnInit {
+export class UsersComponent implements OnInit {
     @Input() pageSize = 4;
     pageNumber : number = 1
-    clients:any[] = []
+    userscrayon:any[] = []
     countries$!: Observable<Country[]>;
     total$!: Observable<number>;
     sortedColumn!: string;
     sortedDirection!: string;
     @ViewChildren(SBSortableHeaderDirective) headers!: QueryList<SBSortableHeaderDirective>;
 
-
   constructor( public countryService: CountryService,private route :Router,private changeDetectorRef: ChangeDetectorRef) {
-    this.onGetClients()
-  }
+    this.onGetUsersCrayon()
+
+   }
 
   ngOnInit(): void {
     this.countryService.pageSize = this.pageSize;
     this.countries$ = this.countryService.countries$;
     this.total$ = this.countryService.total$;
 
-
   }
+
 
   onSort({ column, direction }: SortEvent) {
     this.sortedColumn = column;
@@ -48,24 +48,23 @@ export class ClientsComponent implements OnInit {
 
 onPageSizeChange(event){
     // console.log("event",event.split(": "[1]))
-    this.onGetClients(this.pageNumber,event[0])
+    this.onGetUsersCrayon(this.pageNumber,event[0])
 }
 
 onPageChange(event){
-    this.onGetClients(event,this.pageSize)
+    this.onGetUsersCrayon(event,this.pageSize)
 }
 
-  onGetClients(pageNumber = this.pageNumber,pageSize = this.pageSize){
-    this.countryService.getclients(pageNumber,pageSize).subscribe(
+  onGetUsersCrayon(pageNumber = this.pageNumber,pageSize = this.pageSize){
+    this.countryService.getuserscrayon(pageNumber,pageSize).subscribe(
         (res : any)=>{
-            this.clients= res.Items
+            this.userscrayon= res.Items
             this.countryService.page--
             this.countryService.page++
-            console.log('data is ',this.clients)
+            console.log('data is ',this.userscrayon)
         }
     )
 }
-
 
 
 }

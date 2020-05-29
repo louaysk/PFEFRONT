@@ -1,26 +1,27 @@
- <sb-layout-dashboard>
-    <sb-dashboard-head title="List of Clients" [hideBreadcrumbs]="true"></sb-dashboard-head>
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Manage Users Crayon" [hideBreadcrumbs]="true">
+    </sb-dashboard-head>
     <div class="form-group form-inline">  Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div>
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col"><span>ClientName</span>
+                <th scope="col"><span>FirstName</span>
                 </th>
-                <th scope="col"><span>ClientUri</span>
+                <th scope="col"><span>LastName</span>
                 </th>
-                <th scope="col"><span>Enabled</span>
+                <th scope="col"><span>UserName</span>
                 </th>
-                <th scope="col"><span>Flow</span>
+                <th scope="col"><span>Email</span>
                 </th>
             </tr>
         </thead>
-        <tbody *ngIf="clients.length>0">
-                <tr *ngFor="let c of clients">
-                    <td>{{ c.ClientName }}</td>
-                    <td>{{ c.ClientUri }}</td>
-                    <td>{{ c.Enabled }}</td>
-                    <td>{{ c.Flow }}</td>
+        <tbody *ngIf="userscrayon.length>0">
+                <tr *ngFor="let c of userscrayon">
+                    <td>{{ c.FirstName }}</td>
+                    <td>{{ c.LastName }}</td>
+                    <td>{{ c.UserName }}</td>
+                    <td>{{ c.Email }}</td>
                 </tr>
         </tbody>
     </table>
@@ -31,4 +32,5 @@
             ><option value="4">4 items per page</option
             ><option value="6">6 items per page</option></select>
     </div>
- </sb-layout-dashboard>
+</sb-layout-dashboard>
+
