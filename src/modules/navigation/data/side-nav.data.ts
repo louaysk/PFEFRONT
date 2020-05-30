@@ -37,6 +37,18 @@ export const sideNavSections: SideNavSection[] = [
         items: ['organisations'],
 
     },
+    {
+        index : 6,
+        text: 'Billings Statements',
+        items: ['billingstatement'],
+
+    },
+    {
+        index : 7,
+        text: 'Invoice Profils ',
+        items: ['invoiceprofils'],
+
+    },
     // {
     //     text: 'INTERFACE',
     //     items: ['layouts', 'pages'],
@@ -77,6 +89,14 @@ export const sideNavItems: SideNavItems = {
     organisations : {
         text: 'Organisations ',
         link: '/organisations',
+    },
+    billingstatement :  {
+        text: 'Billings Statement ',
+        link: '/billingstatement',
+    },
+    invoiceprofils:  {
+        text: 'Invoice Profils ',
+        link: '/invoiceprofils',
     },
 
 

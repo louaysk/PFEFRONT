@@ -18,6 +18,8 @@ import { EditorComponent } from '../modules/dashboard/containers/editor/editor.c
 import { ProfileComponent } from "@modules/dashboard/containers/profile/profile.component";
 import { ClientsComponent } from '../modules/dashboard/containers/clients/clients.component';
 import { OrganisationsComponent } from '../modules/dashboard/containers/organisations/organisations.component';
+import { InvoiceprofilesComponent } from '../modules/dashboard/containers/invoiceprofiles/invoiceprofiles.component';
+import { BilligstatementComponent } from '../modules/dashboard/containers/billigstatement/billigstatement.component';
 
 @NgModule({
     declarations: [AppComponent],

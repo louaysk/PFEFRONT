@@ -4,25 +4,35 @@ import { Router } from '@angular/router';
 import { SBSortableHeaderDirective, SortEvent } from '@modules/tables/directives';
 import { Country } from '@modules/tables/models';
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'sb-organisations',
+  selector: 'sb-invoiceprofiles',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './organisations.component.html',
-  styleUrls: ['./organisations.component.scss']
+  templateUrl: './invoiceprofiles.component.html',
+  styleUrls: ['./invoiceprofiles.component.scss']
 })
-export class OrganisationsComponent implements OnInit {
+export class InvoiceprofilesComponent implements OnInit {
     @Input() pageSize = 4;
     pageNumber : number = 1
-    organisations:any[] = []
+    invoices:any[] = []
     countries$!: Observable<Country[]>;
     total$!: Observable<number>;
     sortedColumn!: string;
     sortedDirection!: string;
     @ViewChildren(SBSortableHeaderDirective) headers!: QueryList<SBSortableHeaderDirective>;
 
-  constructor( public countryService: CountryService,private route :Router,private changeDetectorRef: ChangeDetectorRef) {
-this.onGetOraganisations()
+
+  constructor(public countryService: CountryService,private toastr:ToastrService,private route :Router,private changeDetectorRef: ChangeDetectorRef) {
+    let IdOrganisation = localStorage.getItem("organizationId")
+    if (IdOrganisation) {
+    this.Ongetinvoiceprofils(IdOrganisation);
+    }
+    else
+    {
+        this.toastr.info('Please select a default organization');
+        this.route.navigateByUrl('/organisations');
+    }
    }
 
   ngOnInit(): void {
@@ -30,8 +40,6 @@ this.onGetOraganisations()
     this.countries$ = this.countryService.countries$;
     this.total$ = this.countryService.total$;
   }
-
-
   onSort({ column, direction }: SortEvent) {
     this.sortedColumn = column;
     this.sortedDirection = direction;
@@ -40,29 +48,26 @@ this.onGetOraganisations()
     this.changeDetectorRef.detectChanges();
 }
 
+
 onPageSizeChange(event){
     // console.log("event",event.split(": "[1]))
-    this.onGetOraganisations(this.pageNumber,event[0])
+    this.Ongetinvoiceprofils(this.pageNumber,event[0])
 }
 
 onPageChange(event){
-    this.onGetOraganisations(event,this.pageSize)
+    this.Ongetinvoiceprofils(event,this.pageSize)
 }
 
-  onGetOraganisations(pageNumber = this.pageNumber,pageSize = this.pageSize){
-    this.countryService.getorganisations(pageNumber,pageSize).subscribe(
+  Ongetinvoiceprofils(IdOrganisation,pageNumber = this.pageNumber,pageSize = this.pageSize){
+    this.countryService.getinvoiceprofils(IdOrganisation).subscribe(
         (res : any)=>{
-            this.organisations= res.Items
+            this.invoices= res.Items
             this.countryService.page--
             this.countryService.page++
-            console.log('data is ',this.organisations)
+            console.log('data is ',this.invoices)
         }
     )
 }
-
-setDefautOrganisation(id){
-    localStorage.setItem("organizationId",id)
-    }
 
 
 

@@ -192,7 +192,14 @@ export class CountryService {
     }
 
 
-    EditUser() {
+    EditUser(body?) {
+
+        let toUpdateBody: any = {}
+        if (body) {
+            toUpdateBody = body
+        }else{
+            toUpdateBody = this.FormUpdate.value
+        }
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -200,7 +207,7 @@ export class CountryService {
             })
         };
         debugger
-        return this._httpClient.put(this.baseUrl+"ApplicationUser/Edit/" + this.FormUpdate.value.id, this.FormUpdate.value, httpOptions);
+        return this._httpClient.put(this.baseUrl+"ApplicationUser/Edit/" + toUpdateBody.id, toUpdateBody , httpOptions);
     }
 
     GetUserProfile() {
@@ -280,5 +287,23 @@ export class CountryService {
             })
         };
         return this._httpClient.get<any>(this.baseUrl+`Crayon/getOrganizations?page=${page}&pageSize=${pageSize}`, httpOptions).pipe()
+    }
+    getbillingstatements(IdOrganisation) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.get<any>(this.baseUrl+`Crayon/getBillingstatements/`+IdOrganisation, httpOptions).pipe()
+    }
+    getinvoiceprofils(IdOrganisation) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            })
+        };
+        return this._httpClient.get<any>(this.baseUrl+`Crayon/Getinvoiceprofiles/`+IdOrganisation, httpOptions).pipe()
     }
 }

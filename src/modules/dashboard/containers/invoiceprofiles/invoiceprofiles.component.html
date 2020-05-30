@@ -1,27 +1,27 @@
 <sb-layout-dashboard>
-    <sb-dashboard-head title="List of Organisations" [hideBreadcrumbs]="true"></sb-dashboard-head>
+    <sb-dashboard-head title=" List of Invoice Profils" [hideBreadcrumbs]="true"></sb-dashboard-head>
     <div class="form-group form-inline">  Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div>
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col"><span>Id</span>
+                <th scope="col"><span>CustomerReference</span>
                 </th>
                 <th scope="col"><span>Name</span>
                 </th>
-                <th scope="col"><span>ParentId</span>
+                <th scope="col"><span>DeliveryAddress</span>
+                </th>
+                <th scope="col"><span>InvoiceAddress</span>
                 </th>
             </tr>
         </thead>
-        <tbody *ngIf="organisations.length>0">
-                <tr *ngFor="let c of organisations">
-                    <td>{{ c.Id }}</td>
+        <tbody *ngIf="invoices.length>0">
+                <tr *ngFor="let c of invoices">
+                    <td>{{ c.CustomerReference }}</td>
                     <td>{{ c.Name }}</td>
-                    <td>{{ c.ParentId }}</td>
-                    <td>
-                        <a><button (click)="setDefautOrganisation(c.Id)" class="btn btn-primary" >Set Default</button></a>
-                        &nbsp;
-                    </td>
+                    <td>{{ c.DeliveryAddress.CompleteAddress }}</td>
+                    <td>{{ c.InvoiceAddress.CompleteAddress }}</td>
+
                 </tr>
         </tbody>
     </table>
@@ -32,4 +32,7 @@
             ><option value="4">4 items per page</option
             ><option value="6">6 items per page</option></select>
     </div>
- </sb-layout-dashboard>
+
+
+</sb-layout-dashboard>
+

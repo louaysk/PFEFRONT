@@ -1,58 +1,43 @@
 <sb-layout-dashboard>
     <sb-dashboard-head title="DisplayProfile" [hideBreadcrumbs]="true"></sb-dashboard-head>
 
-    <!-- <div class="card m-5" style="width:18rem" *ngIf="userDetails">
-
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item active " ><strong>Firstname : </strong>{{userDetails.firstName}}</li>
-          <li class="list-group-item active "><strong>Lastname : </strong>{{userDetails.lastName}}</li>
-          <li class="list-group-item active"><strong>Email : </strong>{{userDetails.email}}</li>
-          <li class="list-group-item active"><strong>Username : </strong>{{userDetails.userName}}</li>
-          <li class="list-group-item active"><strong>PhoneNumber : </strong>{{userDetails.phoneNumber}}</li>
-          <li class="list-group-item active"><strong>Role : </strong>{{userDetails.role}}</li>
-
-        </ul>
-      </div> -->
-
-
-
-
-
-
-          <div class="d-flex justify-content-center">
+       <div class="d-flex justify-content-center">
 
       <div class="col-lg-8">
                       <div class="card card-small mb-4">
                         <div class="card-header border-bottom">
                           <h6 class="m-0">Account Details</h6>
                         </div>
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush" *ngIf="userDetails">
                           <li class="list-group-item p-3">
                             <div class="row">
                               <div class="col">
-                                <form>
+
                                   <div class="form-row">
                                     <div class="form-group col-md-6">
-                                      <label for="feFirstName">First Name</label>
-                                      <input type="text" class="form-control" id="feFirstName" placeholder="First Name" value="{{userDetails.firstName}}"> </div>
+                                      <label >First Name</label>
+                                      <input type="text" class="form-control"placeholder="First Name" [(ngModel)]="userDetails.firstName" > </div>
                                     <div class="form-group col-md-6">
                                       <label for="feLastName">Last Name</label>
-                                      <input type="text" class="form-control" id="feLastName" placeholder="Last Name" value="{{userDetails.lastName}}"> </div>
+                                      <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="userDetails.lastName"> </div>
                                   </div>
                                   <div class="form-row">
                                     <div class="form-group col-md-6">
                                       <label for="feEmailAddress">Email</label>
-                                      <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="{{userDetails.email}}"> </div>
+                                      <input type="email" class="form-control"  placeholder="Email" [(ngModel)]="userDetails.email" disabled> </div>
                                     <div class="form-group col-md-6">
-                                      <label for="fePassword">PhoneNumber</label>
-                                      <input type="password" class="form-control" id="fePassword" placeholder="{{userDetails.phoneNumber}}"> </div>
+                                      <label for="fephonenumber">PhoneNumber</label>
+                                      <input type="text" class="form-control"  placeholder="phonenumber" [(ngModel)]="userDetails.phoneNumber"> </div>
                                   </div>
                                   <div class="form-group">
                                     <label for="feInputAddress">Role</label>
-                                    <input type="text" class="form-control" id="feInputAddress" placeholder="{{userDetails.role}}"> </div>
+                                    <input type="text" class="form-control" id="feInputAddress" placeholder="{{userDetails.role}}" disabled> </div>
+                                    <div class="form-group">
+                                        <label for="feInputAddress">UserName</label>
+                                        <input type="text" class="form-control" id="feInputusername" placeholder="{{userDetails.userName}}" disabled> </div>
 
-                                  <button type="button" class="btn btn-primary">Update Account</button>
-                                </form>
+                                  <button  (click)="OnUpdate()" type="button" class="btn btn-primary">Update Account</button>
+
                               </div>
                             </div>
                           </li>

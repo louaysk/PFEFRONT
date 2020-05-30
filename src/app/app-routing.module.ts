@@ -7,6 +7,8 @@ import { ClientsComponent } from '../modules/dashboard/containers/clients/client
 import { AuthGuard } from '@modules/auth/guards';
 import { UsersComponent } from '@modules/dashboard/containers/users/users.component';
 import { OrganisationsComponent } from '@modules/dashboard/containers/organisations/organisations.component';
+import { BilligstatementComponent } from '@modules/dashboard/containers/billigstatement/billigstatement.component';
+import { InvoiceprofilesComponent } from '@modules/dashboard/containers/invoiceprofiles/invoiceprofiles.component';
 let currentUser = JSON.parse(localStorage.getItem('currentUser'))
 const routes: Routes = [
     {
@@ -29,6 +31,16 @@ const routes: Routes = [
     {
         path: 'admin-panel',
         component : AdminPanelComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'billingstatement',
+        component : BilligstatementComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'invoiceprofils',
+        component : InvoiceprofilesComponent,
         canActivate: [AuthGuard],
     },
     {

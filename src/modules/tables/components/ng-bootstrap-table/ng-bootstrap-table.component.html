@@ -13,6 +13,7 @@
                 <th scope="col" sbSortable="UserName" (sort)="onSort($event)"><span>UserName</span><sb-sort-icon *ngIf='sortedColumn === "UserName"' [direction]="sortedDirection"></sb-sort-icon></th>
                 <th scope="col" sbSortable="PhoneNumber" (sort)="onSort($event)"><span>PhoneNumber</span><sb-sort-icon *ngIf='sortedColumn === "PhoneNumber"' [direction]="sortedDirection"></sb-sort-icon></th>
                 <th scope="col" sbSortable="Role" (sort)="onSort($event)"><span>Role</span><sb-sort-icon *ngIf='sortedColumn === "Role"' [direction]="sortedDirection"></sb-sort-icon></th>
+                <th scope="col"><span>Actions</span><sb-sort-icon *ngIf='sortedColumn === "Role"' [direction]="sortedDirection"></sb-sort-icon></th>
 
             </tr>
         </thead>
@@ -24,11 +25,11 @@
                 <td>{{ u.username }}</td>
                 <td>{{ u.phoneNumber }}</td>
                 <td>{{ u.role }}</td>
-                <td>
+                <td class="row">
                     <a (click)="goToEditUserPage(u)"><button class="btn btn-primary" >Edit</button></a>
                     &nbsp;
 
-                    <button  (click)="deleteItem(u.UserName)"  class="btn btn-danger" >Delete</button>
+                    <button  (click)="deleteItem(u.UserName)"  class="btn btn-danger " >Delete</button>
                  </td>
             </tr>
         </tbody>
