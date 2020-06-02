@@ -3,15 +3,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { HttpClient } from "@angular/common/http";
 import { browser } from 'protractor';
+import { environment } from 'environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UserService {
+    baseUrl = environment.apiUrl;
 
 
     constructor(private fb: FormBuilder, private http: HttpClient) { }
-    readonly BaseURI = 'http://localhost:54277/api';
+
     formModel = this.fb.group({
         UserName: ['', Validators.required],
         Email: ['', Validators.email],
@@ -48,11 +50,11 @@ export class UserService {
             Password: this.formModel.value.Passwords.Password
         };
 
-        return this.http.post(this.BaseURI + '/ApplicationUser/Register/Admin', body);
+        return this.http.post(this.baseUrl + '/ApplicationUser/Register/Admin', body);
     }
 
     login(formData) {
-        return this.http.post(this.BaseURI + '/ApplicationUser/login', formData);
+        return this.http.post(this.baseUrl + '/ApplicationUser/login', formData);
     }
 
 
