@@ -41,7 +41,8 @@ export class NgBootstrapTableComponent implements OnInit {
         this.countryService.pageSize = this.pageSize;
         this.countries$ = this.countryService.countries$;
         this.total$ = this.countryService.total$;
-        this.onGetUser()
+        this.onGetUser();
+
 
     }
 
@@ -79,11 +80,10 @@ export class NgBootstrapTableComponent implements OnInit {
     }
 
     deleteItem(UserName:string) {
-       this.countryService.deleteUser(UserName).subscribe(()=>{
-
-         //window.location.reload()
-
-      });
+       this.countryService.deleteUser(UserName).subscribe(data=>{
+           console.log(data);
+           this.onGetUser();
+       });
     }
 
 

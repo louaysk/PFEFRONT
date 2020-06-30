@@ -26,11 +26,9 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-between p-2">
-        <ngb-pagination (pageChange)="onPageChange($event)" [collectionSize]="total$ | async" [(page)]="pageNumber" [pageSize]="pageSize"></ngb-pagination>
+        <ngb-pagination (pageChange)="onPageChange($event)" [collectionSize]="paginationArray" [(page)]="pageNumber" [pageSize]="pageSize"></ngb-pagination>
         <select class="custom-select" style="width: auto;" (change)="onPageSizeChange($event.target.value)" name="pageSize" [(ngModel)]="pageSize" >
-            <option value="2">2 items per page</option
-            ><option value="4">4 items per page</option
-            ><option value="6">6 items per page</option></select>
+            <option *ngFor="let item of pageSizeRange" [value]="item">{{item}} items per page</option></select>
     </div>
 </sb-layout-dashboard>
 

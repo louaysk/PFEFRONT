@@ -49,7 +49,7 @@ export class ClientsComponent implements OnInit {
 
 
 onPageSizeChange(event){
-    debugger
+
     // console.log("event",event.split(": "[1]))
     this.onGetClients(this.pageNumber,event)
     console.log("paginationArray : ",this.paginationArray)
@@ -57,7 +57,6 @@ onPageSizeChange(event){
 
 onPageChange(event){
 
-    debugger
     this.onGetClients(event,this.pageSize)
     console.log("paginationArray : ",this.paginationArray)
 }

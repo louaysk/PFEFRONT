@@ -2,6 +2,7 @@
     <sb-dashboard-head title=" List of Billings Statement" [hideBreadcrumbs]="true"></sb-dashboard-head>
 
     <div class="form-group form-inline">  Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div>
+    <div id="print-section">
 
     <table class="table table-striped">
         <thead>
@@ -20,7 +21,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody *ngIf="billings.length>0">
+        <tbody *ngIf="billings && billings.length>0">
                 <tr *ngFor="let c of billings">
                     <td>{{ c.GroupId }}</td>
                     <td>{{ c.Id }}</td>
@@ -33,12 +34,22 @@
                 </tr>
         </tbody>
     </table>
+    </div>
+    <button class="btn btn-info "  (click)="print()">Imprimer</button>
+    &nbsp; &nbsp;
+    <button class="btn btn-info "  >Exporter en PDF</button>
+    &nbsp; &nbsp;
+    <button class="btn btn-info "  >Exporter en Excel</button>
+
+
     <div class="d-flex justify-content-between p-2">
-        <ngb-pagination (pageChange)="onPageChange($event)" [collectionSize]="total$ | async" [(page)]="pageNumber" [pageSize]="pageSize"></ngb-pagination>
+        <ngb-pagination (pageChange)="onPageChange($event)" [collectionSize]="paginationArray" [(page)]="pageNumber" [pageSize]="pageSize"></ngb-pagination>
         <select class="custom-select" style="width: auto;" (change)="onPageSizeChange($event.target.value)" name="pageSize" [(ngModel)]="pageSize" >
-            <option value="2">2 items per page</option
-            ><option value="4">4 items per page</option
-            ><option value="6">6 items per page</option></select>
+            <option value="" >Select Item Per Page</option>
+            <ng-container *ngIf="item<paginationArray" >
+                <option *ngFor="let item of pageSizeRange" [value]="item">{{item}} items per page</option>
+            </ng-container>
+        </select>
     </div>
 
 </sb-layout-dashboard>

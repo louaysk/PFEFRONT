@@ -12,13 +12,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./organisations.component.scss']
 })
 export class OrganisationsComponent implements OnInit {
-    @Input() pageSize = 4;
+    @Input() pageSize = 5;
     pageNumber : number = 1
+    pageSizeRange = [5,15,30]
     organisations:any[] = []
     countries$!: Observable<Country[]>;
     total$!: Observable<number>;
     sortedColumn!: string;
     sortedDirection!: string;
+    paginationArray: number = 10;
+
     @ViewChildren(SBSortableHeaderDirective) headers!: QueryList<SBSortableHeaderDirective>;
 
   constructor( public countryService: CountryService,private route :Router,private changeDetectorRef: ChangeDetectorRef) {
@@ -42,7 +45,7 @@ this.onGetOraganisations()
 
 onPageSizeChange(event){
     // console.log("event",event.split(": "[1]))
-    this.onGetOraganisations(this.pageNumber,event[0])
+    this.onGetOraganisations(this.pageNumber,event)
 }
 
 onPageChange(event){
@@ -53,9 +56,10 @@ onPageChange(event){
     this.countryService.getorganisations(pageNumber,pageSize).subscribe(
         (res : any)=>{
             this.organisations= res.Items
-            this.countryService.page--
             this.countryService.page++
+            this.countryService.page--
             console.log('data is ',this.organisations)
+            this.paginationArray = res.TotalHits
         }
     )
 }

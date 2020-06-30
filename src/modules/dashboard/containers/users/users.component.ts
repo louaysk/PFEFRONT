@@ -15,13 +15,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    @Input() pageSize = 4;
+    @Input() pageSize = 5;
     pageNumber : number = 1
+    pageSizeRange = [5,15,30]
     userscrayon:any[] = []
     countries$!: Observable<Country[]>;
     total$!: Observable<number>;
     sortedColumn!: string;
     sortedDirection!: string;
+    paginationArray: number = 10;
+
     @ViewChildren(SBSortableHeaderDirective) headers!: QueryList<SBSortableHeaderDirective>;
 
   constructor( public countryService: CountryService,private route :Router,private changeDetectorRef: ChangeDetectorRef) {
@@ -48,20 +51,26 @@ export class UsersComponent implements OnInit {
 
 onPageSizeChange(event){
     // console.log("event",event.split(": "[1]))
-    this.onGetUsersCrayon(this.pageNumber,event[0])
+    this.onGetUsersCrayon(this.pageNumber,event)
+    console.log("paginationArray : ",this.paginationArray)
 }
 
 onPageChange(event){
     this.onGetUsersCrayon(event,this.pageSize)
+    console.log("paginationArray : ",this.paginationArray)
 }
 
   onGetUsersCrayon(pageNumber = this.pageNumber,pageSize = this.pageSize){
     this.countryService.getuserscrayon(pageNumber,pageSize).subscribe(
         (res : any)=>{
             this.userscrayon= res.Items
-            this.countryService.page--
             this.countryService.page++
+            this.countryService.page--
+            console.clear
+            this.paginationArray = res.TotalHits
             console.log('data is ',this.userscrayon)
+            console.log(this.paginationArray)
+
         }
     )
 }

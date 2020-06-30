@@ -50,11 +50,11 @@ export class UserService {
             Password: this.formModel.value.Passwords.Password
         };
 
-        return this.http.post(this.baseUrl + '/ApplicationUser/Register/Admin', body);
+        return this.http.post(this.baseUrl + 'ApplicationUser/Register/Admin', body);
     }
 
     login(formData) {
-        return this.http.post(this.baseUrl + '/ApplicationUser/login', formData);
+        return this.http.post(this.baseUrl + 'ApplicationUser/login', formData);
     }
 
 

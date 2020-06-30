@@ -7,6 +7,9 @@ import {
     ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
+import { CountryService } from '@modules/tables/services';
+import { DecimalPipe } from '@angular/common';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'sb-charts-bar',
@@ -18,20 +21,31 @@ export class ChartsBarComponent implements OnInit, AfterViewInit {
     @ViewChild('myBarChart') myBarChart!: ElementRef<HTMLCanvasElement>;
     chart!: Chart;
 
-    constructor() {}
-    ngOnInit() {}
+    constructor(private globalService : CountryService) {}
+    ngOnInit() {
+        let organizationId = localStorage.getItem('organizationId')
+        if (organizationId) {
 
-    ngAfterViewInit() {
+        }
+        this.globalService.getbillingstatements(organizationId)
+        .subscribe((res : any)=>{
+            console.log(res.items)
+            debugger
+            let labels = res.Items.map(x=>new Date(x.StartDate).toISOString().split("T")[0])
+            let datas = res.Items.map(x=>x.TotalSalesPrice.Value)
+
+
+
         this.chart = new Chart(this.myBarChart.nativeElement, {
             type: 'bar',
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                labels: labels,
                 datasets: [
                     {
-                        label: 'Revenue',
+                        label: 'Value',
                         backgroundColor: 'rgba(2,117,216,1)',
                         borderColor: 'rgba(2,117,216,1)',
-                        data: [4215, 5312, 6251, 7841, 9821, 14984],
+                        data: datas,
                     },
                 ],
             },
@@ -54,7 +68,7 @@ export class ChartsBarComponent implements OnInit, AfterViewInit {
                         {
                             ticks: {
                                 min: 0,
-                                max: 15000,
+                                max: 40000,
                                 maxTicksLimit: 5,
                             },
                             gridLines: {
@@ -68,5 +82,10 @@ export class ChartsBarComponent implements OnInit, AfterViewInit {
                 },
             },
         });
-    }
+    })
+
+}
+    ngAfterViewInit() {
+
+}
 }

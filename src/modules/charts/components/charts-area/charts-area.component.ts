@@ -7,6 +7,13 @@ import {
     ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DecimalPipe } from '@angular/common';
+import { environment } from 'environments/environment';
+import { CountryService } from '@modules/tables/services';
+import { subscribeOn } from 'rxjs/operators';
+
+
 
 @Component({
     selector: 'sb-charts-area',
@@ -17,92 +24,88 @@ import { Chart } from 'chart.js';
 export class ChartsAreaComponent implements OnInit, AfterViewInit {
     @ViewChild('myAreaChart') myAreaChart!: ElementRef<HTMLCanvasElement>;
     chart!: Chart;
+    baseUrl = environment.apiUrl;
 
-    constructor() {}
-    ngOnInit() {}
 
-    ngAfterViewInit() {
-        this.chart = new Chart(this.myAreaChart.nativeElement, {
-            type: 'line',
-            data: {
-                labels: [
-                    'Mar 1',
-                    'Mar 2',
-                    'Mar 3',
-                    'Mar 4',
-                    'Mar 5',
-                    'Mar 6',
-                    'Mar 7',
-                    'Mar 8',
-                    'Mar 9',
-                    'Mar 10',
-                    'Mar 11',
-                    'Mar 12',
-                    'Mar 13',
-                ],
-                datasets: [
-                    {
-                        label: 'Sessions',
-                        lineTension: 0.3,
-                        backgroundColor: 'rgba(2,117,216,0.2)',
-                        borderColor: 'rgba(2,117,216,1)',
-                        pointRadius: 5,
-                        pointBackgroundColor: 'rgba(2,117,216,1)',
-                        pointBorderColor: 'rgba(255,255,255,0.8)',
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: 'rgba(2,117,216,1)',
-                        pointHitRadius: 50,
-                        pointBorderWidth: 2,
-                        data: [
-                            10000,
-                            30162,
-                            26263,
-                            18394,
-                            18287,
-                            28682,
-                            31274,
-                            33259,
-                            25849,
-                            24159,
-                            32651,
-                            31984,
-                            38451,
+    constructor(private pipe: DecimalPipe,private globalService : CountryService, private _httpClient: HttpClient) {}
+    ngOnInit() {
+        let token = localStorage.getItem('token')
+        let organizationId = localStorage.getItem('organizationId')
+        if (organizationId) {
+
+        }
+        this.globalService.getbillingstatements(organizationId)
+        .subscribe((res : any)=>{
+            console.log(res.items)
+            debugger
+            let labels = res.Items.map(x=>new Date(x.StartDate).toISOString().split("T")[0])
+            let datas = res.Items.map(x=>x.TotalSalesPrice.Value)
+            this.chart = new Chart(this.myAreaChart.nativeElement, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Value',
+                            lineTension: 0.3,
+                            backgroundColor: 'rgba(2,117,216,0.2)',
+                            borderColor: 'rgba(2,117,216,1)',
+                            pointRadius: 5,
+                            pointBackgroundColor: 'rgba(2,117,216,1)',
+                            pointBorderColor: 'rgba(255,255,255,0.8)',
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: 'rgba(2,117,216,1)',
+                            pointHitRadius: 50,
+                            pointBorderWidth: 2,
+                            data: datas
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        xAxes: [
+                            {
+                                time: {
+                                    unit: 'day',
+                                },
+                                gridLines: {
+                                    display: false,
+                                },
+                                ticks: {
+                                    maxTicksLimit: 7,
+                                },
+                            },
+                        ],
+                        yAxes: [
+                            {
+                                ticks: {
+                                    min: 0,
+                                    max: 40000,
+                                    maxTicksLimit: 5,
+                                },
+                                gridLines: {
+                                    color: 'rgba(0, 0, 0, .125)',
+                                },
+                            },
                         ],
                     },
-                ],
-            },
-            options: {
-                scales: {
-                    xAxes: [
-                        {
-                            time: {
-                                unit: 'day',
-                            },
-                            gridLines: {
-                                display: false,
-                            },
-                            ticks: {
-                                maxTicksLimit: 7,
-                            },
-                        },
-                    ],
-                    yAxes: [
-                        {
-                            ticks: {
-                                min: 0,
-                                max: 40000,
-                                maxTicksLimit: 5,
-                            },
-                            gridLines: {
-                                color: 'rgba(0, 0, 0, .125)',
-                            },
-                        },
-                    ],
+                    legend: {
+                        display: false,
+                    },
                 },
-                legend: {
-                    display: false,
-                },
-            },
-        });
+            });
+        })
+    }
+
+
+    /**
+     * Call for the API to retrieve Data
+     */
+
+     /***
+      * Traitement for extracting only data + money
+      */
+    ngAfterViewInit() {
+
     }
 }
