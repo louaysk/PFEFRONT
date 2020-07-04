@@ -277,7 +277,7 @@ export class CountryService {
                 'Authorization': `Bearer ${this.token}`
             })
         };
-        return this._httpClient.get<any>(this.baseUrl+`Crayon/getUsers?page=${page}&pageSize=${pageSize}`, httpOptions).pipe()
+        return this._httpClient.get<any>(this.baseUrl+`Crayon/getUsers?search=${this.searchTerm}&page=${page}&pageSize=${pageSize}`, httpOptions).pipe()
     }
 
 
