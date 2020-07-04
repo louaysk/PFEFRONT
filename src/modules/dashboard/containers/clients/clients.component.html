@@ -1,6 +1,10 @@
  <sb-layout-dashboard>
     <sb-dashboard-head title="List of Clients" [hideBreadcrumbs]="true"></sb-dashboard-head>
-    <div class="form-group form-inline">  Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div>
+    <div class="form-group form-inline">
+        Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" />
+        <span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span>
+        <Button class="btn btn-primary" (click)="onGetClients()">Search</Button>
+    </div>
 
     <table class="table table-striped">
         <thead>
